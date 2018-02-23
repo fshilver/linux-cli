@@ -1,0 +1,36 @@
+#!/bin/sh
+
+if [ $# -ne 2 ];then
+	echo "Usage:$0 <src> <dst>"
+	exit 1
+fi
+
+src_file=`basename $1 .m3u8`
+dst_file=`basename $2 .m3u8`
+
+cp ${src_file}.m3u8 ${dst_file}.m3u8
+
+cp -r ${src_file}_0/ ${dst_file}_0/
+cp -r ${src_file}_1/ ${dst_file}_1/
+cp -r ${src_file}_2/ ${dst_file}_2/
+cp -r ${src_file}_3/ ${dst_file}_3/
+
+rename $src_file ${dst_file} ${dst_file}_0/*
+rename $src_file ${dst_file} ${dst_file}_1/*
+rename $src_file ${dst_file} ${dst_file}_2/*
+rename $src_file ${dst_file} ${dst_file}_3/*
+
+sed -i "s/^\/${src_file}/\/${dst_file}/" ${dst_file}.m3u8
+
+sed -i "s/^\/${src_file}/\/${dst_file}/" ${dst_file}_0/${dst_file}_0.m3u8
+sed -i "s/^\/${src_file}/\/${dst_file}/" ${dst_file}_1/${dst_file}_1.m3u8
+sed -i "s/^\/${src_file}/\/${dst_file}/" ${dst_file}_2/${dst_file}_2.m3u8
+sed -i "s/^\/${src_file}/\/${dst_file}/" ${dst_file}_3/${dst_file}_3.m3u8
+
+dos2unix ${dst_file}.m3u8
+dos2unix ${dst_file}_0/${dst_file}_0.m3u8
+dos2unix ${dst_file}_1/${dst_file}_1.m3u8
+dos2unix ${dst_file}_2/${dst_file}_2.m3u8
+dos2unix ${dst_file}_3/${dst_file}_3.m3u8
+
+/root/bin/CiidxGenerator-64-1.0.1 /data1/${dst_file}.m3u8
