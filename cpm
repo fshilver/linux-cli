@@ -1,0 +1,26 @@
+#!/bin/bash
+
+REPO=http://172.16.32.105
+
+case "$1" in
+	"list")
+		if [ -z "$2" ];then
+			curl ${REPO} 2>/dev/null | egrep -o 'href="[a-zA-Z0-9\.]+' | egrep -v '\.\.' | cut -d '"' -f2
+		else
+			curl ${REPO}/${2}/ 2>/dev/null | egrep -o 'href="[a-zA-Z0-9\.]+-[a-zA-Z0-9\.]+"' | cut -d'"' -f2 | cut -d'-' -f2
+		fi
+		;;
+	"install")
+		if [ -n "$2" -a -n "$3" ];then
+			wget ${REPO}/${2}/${2}-${3}
+			chmod 744 ${2}-${3}
+		else
+			echo "Usage: cpm install <binary name> <version>"
+			echo "    ~$ cpm install CiVODServer 4.2.25.QR3"
+		fi
+		;;
+	*)
+		echo "invalid command"
+		;;
+
+esac
