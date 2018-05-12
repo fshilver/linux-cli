@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# https://en.wikipedia.org/wiki/ANSI_escape_code
+# SGR
+# 38  Set foreground color    Next arguments are 5;n or 2;r;g;b, see below
+# 48  Set background color    Next arguments are 5;n or 2;r;g;b, see below
+
+
+# PREFIX
+# 0 : normal
+# 1 : bold or increased intensity
+# 2 : faint (decreased intensity)
+# 3 : italic
+# 4 : underline
+for PREFIX in 0 #1 2 3 4
+do
+    for SGR in 38 48
+    do
+        for COLOR in {0..255}
+        do
+            # echo -e "escape(colorize)" "string" "escape(reset)"
+            # start with \e[ or \033[
+            # \033[ PREFIX;SGR;5;COLOR
+            # what is third one? I don't know yet (in this case, 5)
+            echo -e "\e[${PREFIX};${SGR};5;${COLOR}m""\\e\[${PREFIX};${SGR};5;${COLOR}m""\e[0m"
+        done
+    done
+done

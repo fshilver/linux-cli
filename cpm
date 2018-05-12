@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO=http://172.16.32.105
+REPO=http://172.16.8.104
 
 case "$1" in
 	"list")
