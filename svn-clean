@@ -1,0 +1,25 @@
+#!/bin/sh
+
+find . -name ".svn" -exec rm -rf {} \;
+find . -name "*.a" -exec rm -f {} \;
+find . -name "*.lib" -exec rm -f {} \;
+find . -name "*.so" -exec rm -f {} \;
+find . -name "*.dll" -exec rm -f {} \;
+find . -name "*.vcproj" -exec rm -f {} \;
+find . -name "*.sln" -exec rm -f {} \;
+find . -name "*.pdb" -exec rm -f {} \;
+find . -name "*.dsp" -exec rm -f {} \;
+find . -name "*.dsw" -exec rm -f {} \;
+find . -name "*.rc" -exec rm -f {} \;
+find . -name "*.rc2" -exec rm -f {} \;
+find . -name "*.ico" -exec rm -f {} \;
+find . -name "*.ppt" -exec rm -f {} \;
+find . -name "*.pptx" -exec rm -f {} \;
+find . -name "*.doc" -exec rm -f {} \;
+find . -name "*.docx" -exec rm -f {} \;
+find . -name "*.xls" -exec rm -f {} \;
+find . -name "*.xlsx" -exec rm -f {} \;
+find . -name "*.exe" -exec rm -f {} \;
+find . -name "*.png" -exec rm -f {} \;
+find . -name "*.html" -exec rm -f {} \;
+find . -name "*.chm" -exec rm -f {} \;
